@@ -1,0 +1,300 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(252, 198, 0, 0.879);
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+
+.board {
+    width: 80vw;
+    height: 50vh;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    margin: auto;
+    justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  
+}
+
+:root{
+    --cell-size: 100px;
+    --mark-size: calc(var(--cell-size)* .9);
+}
+
+.cell {
+    width: var( --cell-size);
+    height:var( --cell-size);
+    align-items: center;
+    display:flex; 
+    position: relative;
+    justify-content: center;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+}
+
+
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top:none;
+}
+
+.cell:nth-child(3n+1){
+    border-left: none;
+}
+.cell:nth-child(3n+3){
+    border-right: none;
+}
+
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8){
+    border-bottom:none;
+}
+
+.cell.x,
+.cell.o {
+  cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.o::before {
+  background-color: rgb(255, 255, 255);
+}
+
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.o .cell:not(.x):not(.o):hover::before {
+  background-color: rgb(255, 255, 255);
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+  content: '';
+  position: absolute;
+  width: calc(var(--mark-size) * .15);
+  height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+  transform: rotate(-45deg);
+}
+
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+}
+
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+  width: calc(var(--mark-size) * .7);
+  height: calc(var(--mark-size) * .7);
+  background-color: rgba(252, 198, 0, 0.879);
+}
+
+h1 {
+    color: rgb(255, 255, 255);
+    font-size: 1.7em;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+  
+
+
+  .winnerModal {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left:  20%;
+    right:  20%;
+    bottom:  20%;
+    background-color: rgba(54, 54, 54, 0.9);
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4rem;
+    flex-direction: column;
+     flex-wrap:wrap;
+  }
+
+  
+.winnerModal button {
+    font-size: 1.2rem;
+    background-color: white;
+    border: 1px solid black;
+    padding:3%;
+    cursor: pointer;
+  }
+
+  .winnerModal button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+
+
+.winner-modal-content{
+    /* background-color: rgb(0, 0, 0); */
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    color:rgb(255, 255, 255);
+    border-radius: 10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+   
+  
+}
+
+  h2{
+    color: rgb(255, 255, 255);
+    /* align-items:center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center; */
+    font-size:0.7em;
+  }
+
+.winnerModal.show {
+  display: flex;
+}
+.winnerModal p {
+    font-size: 0.5em;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:1%;
+}
+
+  .modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 46, 46, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+    width: 50%;
+    height: 20%;
+    color:rgb(255, 255, 255);
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+.modal.show {
+    display: flex;
+  }
+
+.options {
+    margin-bottom: 20px;
+} 
+ 
+button {
+    background-color: rgb(255, 234, 42);
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+
+    font-size: 30px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+.close-button:hover,
+.close-button:focus {
+    color: rgb(255, 234, 42);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+.game-manipulate{
+    justify-content:center;
+    align-content:center;
+    align-items:center;
+    top: 20%
+}
+
+
+.restart-button button{
+    font-size: 1.2rem;
+    background-color: rgb(0, 0, 0);
+    color:white;
+    border :none;
+    padding:1% 2%;
+}
+
+.restart-button button:hover {
+    background-color: rgb(255, 234, 42);
+    color: rgb(0, 0, 0);
+    border :none;
+  }
+
+.table{
+    display: flex;
+    justify-content: center;
+}
+/* .current-player {
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: center;
+    color:#ffffff
+  }
+
+  
+.x {
+    color: rgb(255, 234, 42);
+    position: relative;
+    font-size: 5.5em;
+    cursor: default;
+}
+.o {
+    color: rgb(82, 192, 255);
+align-items:center;
+justify-content:center;
+    font-size: 5.5em;
+    cursor: default;
+}  */
